@@ -1,15 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wp-service1
+  name: {{ .Values.service.name }}
+  labels:
+    app: {{ .Values.service.labels.app }}
 spec:
   selector:
-    app: wp-dep1
+    app: {{ .Values.service.selector.app }}
   ports:
   - port: {{ .Values.service.port }}
     targetPort: {{ .Values.service.targetPort }}
   type: {{ .Values.service.type }}
-  #externalIPs:
-   # - 192.168.58.2
-
-

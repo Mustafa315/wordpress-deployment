@@ -1,0 +1,60 @@
+# Default values for wordpress-deployment.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: wordpress
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: wp-dep1
+wordpress:
+  name: wordpress
+  image: wordpress
+  resources:
+    limits:
+      memory: "128Mi"
+      cpu: "500m"
+
+
+db:
+  host: ""
+  name: ""
+  username: ""
+  password: ""
+
+service:
+  name: wordpress
+  selector:
+    app: wordpress
+  labels:
+    app: wordpress
+  type: NodePort
+  port: 8000
+  targetPort: 80
+
+ingress:
+  labels:
+    app: wordpress
+  name: wordpress
+  ip: 127.0.0.1
+  annotations: 
+    cert-manager.io/cluster-issuer: test-selfsigned1
+  tls:
+    secretName: secret-tls
+
+secret:
+  name: wordpress
+
+tls:
+  issuerName: self-signed
+  certName: cert
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

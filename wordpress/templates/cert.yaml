@@ -1,26 +1,20 @@
-
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: test-selfsigned1
-  
+  name: {{ .Values.tls.issuerName }}
 spec:
   selfSigned: {}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: selfsigned-cert1
-  
+  name: {{ .Values.tls.cert }}
 spec:
-  #dnsNames:
-   # - nip.io
   isCA: true
-  commonName: my-selfsigned-ca1
-  
-  secretName: secret-tls1
+  commonName: self-signed
+  secretName: {{ .Values.ingress.tls.secretName }}
   issuerRef:
-    name: test-selfsigned1
+    name: {{ .Values.tls.issuerName }}
     kind: ClusterIssuer
     group: cert-manager.io
   
