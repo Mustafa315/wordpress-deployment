@@ -8,7 +8,7 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ .Values.tls.cert }}
+  name: {{ .Values.tls.certName }}
 spec:
   isCA: true
   commonName: self-signed
