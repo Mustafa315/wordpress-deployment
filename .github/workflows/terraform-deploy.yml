@@ -10,10 +10,10 @@ jobs:
       - name: start minikube
         id: minikube
         uses: medyagh/setup-minikube@latest
-        with:
-          driver: docker
-          addons: ingress
-      
+
+      - name: enable ingress addon
+        run: minikube addon enable ingress
+
       - name: Checkout
         uses: actions/checkout@v2
 
