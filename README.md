@@ -100,11 +100,11 @@
 * We can also use External Secrets Operator (ESO), ESO is a Kubernetes Operator that interacts with external providers.
 
 | Concept | Summary | 
-| ------  | ------- |
+|         |         |
 |Kubernetes Secrets |  Secrets are Kubernetes objects that contain sensitive data such as credentials, API keys, etc.<br>Kubernetes Secrets are the default construct for managing sensitive data in Kubernetes.|
-| ------  | ------- |
+|         |         |
 | Kubernetes External Secrets  | Kubernetes External Secrets store sensitive data outside the Kubernetes cluster.<br>External providers such as HashiCorp Vault and AWS Secrets Manager handle entire secret lifecycle management.<br>Kubernetes cluster objects such as pods can reference these externally stored secrets. |
-| ------  | ------- |
+|         |         |
 | External Secrets Operator (ESO) | External Secrets Operator (ESO) is a Kubernetes Operator that interacts with external providers.<br>ESO uses APIs these external providers provide and fetches the secrets stored in external backends.<br>ESO is compatible with several secrets providers such as AWS Secrets Manager, HashiCorp Vault, Azure Key Vault, etc. |
 
 ## Describe your approach for deploying and managing “Addons” applications that enable, automate or facilitate setups on Kubernetes. 
