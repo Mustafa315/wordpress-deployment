@@ -7,6 +7,7 @@ resource "helm_release" "wordpress" {
   namespace        = var.wordpress_namespace
   create_namespace = true
   chart            = "${path.module}/${var.application}"
+  timeout          = 120
 
   set {
     name  = "ingress.ip"
@@ -44,6 +45,7 @@ resource "helm_release" "cert-manager" {
   create_namespace = true
   repository       = var.helm_repo
   chart            = var.certmanager_release
+  timeout          = 120
   set {
     name  = "installCRDs"
     value = "true"
@@ -55,6 +57,7 @@ resource "helm_release" "mysql" {
   namespace        = var.mysql_release
   repository       = var.helm_repo
   chart            = var.mysql_release
+  timeout          = 120
   # set {
   #   name  = "auth.rootPassword"
   #   value = "secretpassword"
