@@ -12,7 +12,7 @@ jobs:
         uses: medyagh/setup-minikube@latest
 
       - name: enable ingress addon
-        run: minikube addon enable ingress
+        run: minikube addons enable ingress
 
       - name: Checkout
         uses: actions/checkout@v2
