@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wordpress-install
+  annotations:
+    "helm.sh/hook": "post-install"
+    "helm.sh/hook-weight": "1"
+spec:
+  template:
+    spec:
+      containers:
+      - name: post-install
+        image: wordpress
+        env:
+        - name: WORDPRESS_DB_HOST
+          valueFrom:
+           secretKeyRef:
+             name: {{ .Values.secret.name }}
+             key: host
+        - name: WORDPRESS_DB_NAME
+          valueFrom:
+           secretKeyRef:
+             name: {{ .Values.secret.name }}
+             key: db
+        - name: WORDPRESS_DB_USER
+          valueFrom:
+           secretKeyRef:
+             name: {{ .Values.secret.name }}
+             key: user
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+           secretKeyRef:
+             name: {{ .Values.secret.name }}
+             key: password
+        imagePullPolicy: Always
+        workingDir: /var/www/html
+        command: ["/bin/bash", "-c"]
+        args:
+          - echo starting;
+            curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar;
+            chmod +x wp-cli.phar;
+            mv wp-cli.phar /usr/local/bin/wp;
+            wp core install --url=localhost --title="WordPress" --admin_user=admin --admin_password=password --admin_email=admin@test.com --allow-root --path=/var/www/html
+        volumeMounts:
+        - name: wordpress
+          mountPath: /var/www/html
+      volumes:
+        - name: wordpress
+          persistentVolumeClaim:
+            claimName: wordpress-pvc
+      restartPolicy: OnFailure

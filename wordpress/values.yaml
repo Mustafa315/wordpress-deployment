@@ -15,6 +15,7 @@ image:
 wordpress:
   name: wordpress
   image: wordpress
+  imagePullPolicy: Always
   resources:
     limits:
       memory: "128Mi"
@@ -34,16 +35,13 @@ service:
   labels:
     app: wordpress
   type: NodePort
-  port: 8000
-  targetPort: 80
+  port: 80
 
 ingress:
   labels:
     app: wordpress
   name: wordpress
   ip: 127.0.0.1
-  annotations: 
-    cert-manager.io/cluster-issuer: test-selfsigned1
   tls:
     secretName: secret-tls
 

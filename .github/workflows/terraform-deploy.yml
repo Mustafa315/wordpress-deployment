@@ -21,13 +21,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: ">= 1.1.2"
-        
-      - name: Terraform init
-        run: terraform init
 
-      - name: Terraform deploy
-        run: terraform apply --auto-approve
-
-      - name: Terraform destroy
-        run: terraform destroy --auto-approve
-        continue-on-error: true
+      - name: Test terraform
+        working-directory: test
+        run: go test -v -timeout 10m

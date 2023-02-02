@@ -11,7 +11,7 @@ variable "mysql_release" {
 }
 
 variable "wordpress_namespace" {
-  default     = "wordress"
+  default     = "wordpress"
   type        = string
   description = "Namespace in which wordpress will be installed."
 }

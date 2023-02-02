@@ -13,9 +13,16 @@ spec:
       labels:
         app: {{ .Values.wordpress.name }}
     spec:
+      volumes:
+        - name: wordpress
+          persistentVolumeClaim:
+            claimName: wordpress-pvc
       containers:
       - name: {{ .Values.wordpress.name }}
         image: {{ .Values.wordpress.image }}
+        volumeMounts:
+        - name: wordpress
+          mountPath: /var/www/html
         env:
         - name: WORDPRESS_DB_HOST
           valueFrom:

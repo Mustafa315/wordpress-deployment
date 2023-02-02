@@ -3,17 +3,17 @@ kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
   annotations:
-    cert-manager.io/cluster-issuer: {{ .Values.ingress.annotations }}
+    cert-manager.io/cluster-issuer: {{ .Values.tls.issuerName }}
   labels:
     app: {{ .Values.ingress.labels.app }}
 spec:
   ingressClassName: nginx
   tls:
     - hosts: 
-      - "{{ .Values.ingress.ip }}-app.nip.io"
+      - "{{ .Values.ingress.ip }}.nip.io"
       secretName: {{ .Values.ingress.tls.secretName }}
   rules:
-  - host: "{{ .Values.ingress.ip }}-app.nip.io"
+  - host: "{{ .Values.ingress.ip }}.nip.io"
     http:
       paths:
       - pathType: Prefix

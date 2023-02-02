@@ -58,10 +58,7 @@ resource "helm_release" "mysql" {
   repository       = var.helm_repo
   chart            = var.mysql_release
   timeout          = 120
-  # set {
-  #   name  = "auth.rootPassword"
-  #   value = "secretpassword"
-  # }
+  
   set {
     name  = "auth.database"
     value = var.mysql_database
