@@ -2,7 +2,7 @@
 
 * setup of Terraform for deploying a Minikube Kubernetes cluster.
 * Three Helm charts will be released by the Kubernetes cluster. WordPress helm chart, MySQL helm chart, and cert-manager helm chart.
-* Wordpress volume persistence (PVC) to instal Wordpress cli on it.
+* Wordpress volume persistence (PVC) to store Wordpress files on it.
 * Make a bash script that passes the Kubernetes cluster ip to the Ingress as an output.
 * NodePort Service creation on the WordPress helm chart.
 * Utilising Self-signed certificate that is not issued by a certificate authority.
@@ -45,7 +45,7 @@
        storage: 200Mi
    ```
 
-* Installing the WordPress cli on our newly constructed PVC.
+* Installing PVC to store Wordpress files.
  ```sh
   args:
           - echo starting;
@@ -74,7 +74,6 @@
 * Run Terratest manually as a test to ensure.  
  ```sh
   cd test
-  go mod init test
   go test -v
   ``` 
 
